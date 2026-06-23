@@ -51,14 +51,21 @@ end
   end
 
   # DELETE /cards/1 or /cards/1.json
-  def destroy
-    @card.destroy!
+def destroy
+  @board = @card.list.board
 
-    respond_to do |format|
-      format.html { redirect_to cards_path, notice: "Card was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
+  @card.destroy!
+
+  respond_to do |format|
+    format.html do
+      redirect_to @board,
+                  notice: "Card was successfully destroyed.",
+                  status: :see_other
     end
+
+    format.json { head :no_content }
   end
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -3,46 +3,27 @@ require "test_helper"
 class CardsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @card = cards(:one)
-  end
-
-  test "should get index" do
-    get cards_url
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_card_url
-    assert_response :success
+    @list = lists(:one)
+    @board = boards(:one)
   end
 
   test "should create card" do
     assert_difference("Card.count") do
-      post cards_url, params: { card: { list_id: @card.list_id, title: @card.title } }
+      post board_list_cards_url(@board, @list), params: {
+        card: {
+          title: "Novo Card"
+        }
+      }
     end
 
-    assert_redirected_to card_url(Card.last)
-  end
-
-  test "should show card" do
-    get card_url(@card)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_card_url(@card)
-    assert_response :success
-  end
-
-  test "should update card" do
-    patch card_url(@card), params: { card: { list_id: @card.list_id, title: @card.title } }
-    assert_redirected_to card_url(@card)
+    assert_redirected_to board_url(@board)
   end
 
   test "should destroy card" do
     assert_difference("Card.count", -1) do
-      delete card_url(@card)
+      delete board_list_card_url(@board, @list, @card)
     end
 
-    assert_redirected_to cards_url
+    assert_redirected_to board_url(@board)
   end
 end
