@@ -19,7 +19,7 @@ class ListsController < ApplicationController
   def edit
   end
 
-  # POST /lists or /lists.json
+# POST /lists or /lists.json
 def create
   @board = Board.find(params[:board_id])
   @list = @board.lists.new(list_params)
@@ -48,7 +48,7 @@ end
     end
   end
 
-  # DELETE /lists/1 or /lists/1.json
+# DELETE /lists/1 or /lists/1.json
 def destroy
   @board = @list.board
   @list.destroy!
