@@ -1,10 +1,14 @@
-<p style="color: green"><%= notice %></p>
+<h1><%= @board.name %></h1>
 
-<%= render @board %>
+<h2>Lists</h2>
 
-<div>
-  <%= link_to "Edit this board", edit_board_path(@board) %> |
-  <%= link_to "Back to boards", boards_path %>
+<% @board.lists.each do |list| %>
+  <div>
+    <h3><%= list.name %></h3>
 
-  <%= button_to "Destroy this board", @board, method: :delete %>
-</div>
+    <% list.cards.each do |card| %>
+      <p>- <%= card.title %></p>
+    <% end %>
+
+  </div>
+<% end %>
