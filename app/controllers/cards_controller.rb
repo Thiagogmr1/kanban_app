@@ -50,7 +50,7 @@ end
     end
   end
 
-  # DELETE /cards/1 or /cards/1.json
+# DELETE /cards/1 or /cards/1.json
 def destroy
   @board = @card.list.board
 
