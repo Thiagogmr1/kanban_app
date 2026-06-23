@@ -3,23 +3,22 @@
 <h2>Lists</h2>
 
 <% @board.lists.each do |list| %>
-  <div>
-    <h3><%= list.name %></h3>
+  <h3><%= list.name %></h3>
 
-    <% list.cards.each do |card| %>
-      <p>- <%= card.title %></p>
-    <% end %>
-  </div>
-<% end %>
+  <% list.cards.each do |card| %>
+    <p>- <%= card.title %></p>
+  <% end %>
 
-<h2>New List</h2>
+  <h4>New Card</h4>
 
-<%= form_with(model: [@board, List.new]) do |form| %>
-  <div>
-    <%= form.text_field :name, placeholder: "List name" %>
-  </div>
+  <%= form_with(model: [@board, list, Card.new]) do |form| %>
+    <div>
+      <%= form.text_field :title, placeholder: "Card title" %>
+    </div>
 
-  <div>
-    <%= form.submit "Create List" %>
-  </div>
+    <div>
+      <%= form.submit "Add Card" %>
+    </div>
+  <% end %>
+
 <% end %>

@@ -1,9 +1,20 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Limpa dados antigos (importante quando for resetar o banco)
+Card.destroy_all
+List.destroy_all
+Board.destroy_all
+
+# Cria um board principal
+board = Board.create!(name: "Projeto Rails")
+
+# Cria listas padrão do Kanban
+todo = board.lists.create!(name: "A Fazer")
+doing = board.lists.create!(name: "Fazendo")
+done = board.lists.create!(name: "Concluído")
+
+# Cria cards de exemplo
+todo.cards.create!(title: "Aprender Rails")
+todo.cards.create!(title: "Estudar Active Record")
+
+doing.cards.create!(title: "Construir UI do Kanban")
+
+done.cards.create!(title: "Instalar Rails e configurar ambiente")
