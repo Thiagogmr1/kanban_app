@@ -20,19 +20,20 @@ class ListsController < ApplicationController
   end
 
   # POST /lists or /lists.json
-  def create
-    @list = List.new(list_params)
+def create
+  @board = Board.find(params[:board_id])
+  @list = @board.lists.new(list_params)
 
-    respond_to do |format|
-      if @list.save
-        format.html { redirect_to @list, notice: "List was successfully created." }
-        format.json { render :show, status: :created, location: @list }
-      else
-        format.html { render :new, status: :unprocessable_content }
-        format.json { render json: @list.errors, status: :unprocessable_content }
-      end
+  respond_to do |format|
+    if @list.save
+      format.html { redirect_to @board, notice: "List was successfully created." }
+      format.json { render :show, status: :created, location: @list }
+    else
+      format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: @list.errors, status: :unprocessable_entity }
     end
   end
+end
 
   # PATCH/PUT /lists/1 or /lists/1.json
   def update
