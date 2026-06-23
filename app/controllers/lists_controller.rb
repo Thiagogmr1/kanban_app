@@ -49,14 +49,15 @@ end
   end
 
   # DELETE /lists/1 or /lists/1.json
-  def destroy
-    @list.destroy!
+def destroy
+  @board = @list.board
+  @list.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to lists_path, notice: "List was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
-    end
+  respond_to do |format|
+    format.html { redirect_to @board, notice: "List was successfully destroyed.", status: :see_other }
+    format.json { head :no_content }
   end
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.
