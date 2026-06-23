@@ -19,7 +19,7 @@ class CardsController < ApplicationController
   def edit
   end
 
-  # POST /cards or /cards.json
+# POST /cards or /cards.json
 def create
   @board = Board.find(params[:board_id])
   @list = @board.lists.find(params[:list_id])
