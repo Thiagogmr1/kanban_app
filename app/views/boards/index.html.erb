@@ -1,16 +1,15 @@
-<p style="color: green"><%= notice %></p>
+<header class="page-header">
+  <h1 class="page-title">Meus Quadros</h1>
+</header>
 
-<% content_for :title, "Boards" %>
-
-<h1>Boards</h1>
-
-<div id="boards">
+<div class="boards-grid">
   <% @boards.each do |board| %>
-    <%= render board %>
-    <p>
-      <%= link_to "Show this board", board %>
-    </p>
+    <%= link_to board_path(board), class: "board-tile" do %>
+      <span class="board-tile-name"><%= board.name %></span>
+    <% end %>
+  <% end %>
+
+  <%= link_to new_board_path, class: "board-tile board-tile--new" do %>
+    <span>+ Criar novo quadro</span>
   <% end %>
 </div>
-
-<%= link_to "New board", new_board_path %>
