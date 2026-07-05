@@ -1,9 +1,11 @@
 <%= form_with(model: board) do |form| %>
   <% if board.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
+    <div class="form-errors">
+      <h2 class="form-errors-title">
+        <%= pluralize(board.errors.count, "erro") %> impediram este quadro de ser salvo:
+      </h2>
 
-      <ul>
+      <ul class="form-errors-list">
         <% board.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,12 +13,12 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-field">
+    <%= form.label :name, "Nome do quadro" %>
+    <%= form.text_field :name, placeholder: "Ex: Projeto Pessoal", autofocus: true %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= form.submit "Criar quadro", class: "form-submit" %>
   </div>
 <% end %>

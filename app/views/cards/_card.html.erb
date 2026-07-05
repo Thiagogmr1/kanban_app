@@ -1,12 +1,4 @@
-<div id="<%= dom_id card %>">
-  <div>
-    <strong>Title:</strong>
-    <%= card.title %>
-  </div>
-
-  <div>
-    <strong>List:</strong>
-    <%= card.list_id %>
-  </div>
-
+<div id="<%= dom_id card %>" class="card-item <%= card_stage_class(card.list.name) %>" data-card-id="<%= card.id %>">
+  <p class="card-item-title"><%= card.title %></p>
+  <span class="card-status-label"><%= card.list.name %></span>
 </div>
