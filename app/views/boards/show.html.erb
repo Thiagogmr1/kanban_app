@@ -6,12 +6,19 @@
 <div class="board-container">
   <% @board.lists.each do |list| %>
     <section class="list-column">
-      <h3 class="list-title"><%= list.name %></h3>
+<div class="list-header">
+  <%= form_with(model: [@board, list], method: :patch, class: "edit-list-form") do |form| %>
+    <%= form.text_field :name, value: list.name, class: "list-title-input" %>
+  <% end %>
+  <%= button_to "×", [@board, list], method: :delete,
+        class: "delete-list-btn",
+        form: { data: { turbo_confirm: "Tem certeza que deseja excluir a lista \"#{list.name}\" e todos os seus cards?" } } %>
+</div>
 
       <div class="card-list"
-+           data-controller="sortable"
-+           data-sortable-board-id-value="<%= @board.id %>"
-+           data-sortable-list-id-value="<%= list.id %>">
+          data-controller="sortable"
+          data-sortable-board-id-value="<%= @board.id %>"
+          data-sortable-list-id-value="<%= list.id %>">
         <% if list.cards.any? %>
           <%= render partial: "cards/card", collection: list.cards, as: :card %>
         <% else %>
@@ -25,4 +32,11 @@
       <% end %>
     </section>
   <% end %>
+
+  <section class="list-column new-list-column">
+    <%= form_with(model: [@board, List.new], class: "new-list-form") do |form| %>
+      <%= form.text_field :name, placeholder: "Nome da lista", class: "new-list-input" %>
+      <%= form.submit "Adicionar lista", class: "new-list-submit" %>
+    <% end %>
+  </section>
 </div>

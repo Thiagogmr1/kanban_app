@@ -1,4 +1,11 @@
 <div id="<%= dom_id card %>" class="card-item <%= card_stage_class(card.list.name) %>" data-card-id="<%= card.id %>">
-  <p class="card-item-title"><%= card.title %></p>
+  <div class="card-item-header">
+    <%= form_with(model: [card.list.board, card.list, card], method: :patch, class: "edit-card-form") do |form| %>
+      <%= form.text_field :title, value: card.title, class: "card-title-input" %>
+    <% end %>
+    <%= button_to "×", [card.list.board, card.list, card], method: :delete,
+          class: "delete-card-btn",
+          form: { data: { turbo_confirm: "Tem certeza que deseja excluir o card \"#{card.title}\"?" } } %>
+  </div>
   <span class="card-status-label"><%= card.list.name %></span>
 </div>

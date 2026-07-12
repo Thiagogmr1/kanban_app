@@ -23,6 +23,16 @@
     <%= javascript_importmap_tags %>
   </head>
 
+  <div id="confirm-modal-overlay" class="confirm-modal-overlay">
+  <div class="confirm-modal" role="alertdialog" aria-modal="true">
+    <p id="confirm-modal-message" class="confirm-modal-message"></p>
+    <div class="confirm-modal-actions">
+      <button type="button" id="confirm-modal-cancel" class="confirm-modal-cancel">Cancelar</button>
+      <button type="button" id="confirm-modal-confirm" class="confirm-modal-confirm">Excluir</button>
+    </div>
+  </div>
+</div>
+
 <body>
   <header class="app-navbar">
     <div class="app-navbar-left">

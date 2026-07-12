@@ -4,9 +4,14 @@
 
 <div class="boards-grid">
   <% @boards.each do |board| %>
-    <%= link_to board_path(board), class: "board-tile" do %>
-      <span class="board-tile-name"><%= board.name %></span>
-    <% end %>
+    <div class="board-tile">
+      <%= link_to board_path(board), class: "board-tile-link" do %>
+        <span class="board-tile-name"><%= board.name %></span>
+      <% end %>
+      <%= button_to "×", board, method: :delete,
+            class: "delete-board-btn",
+            form: { data: { turbo_confirm: "Tem certeza que deseja excluir o quadro \"#{board.name}\" e tudo dentro dele?" } } %>
+    </div>
   <% end %>
 
   <%= link_to new_board_path, class: "board-tile board-tile--new" do %>
