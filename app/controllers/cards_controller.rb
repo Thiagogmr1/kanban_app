@@ -38,17 +38,17 @@ class CardsController < ApplicationController
   end
 
   # PATCH/PUT /cards/1 or /cards/1.json
-  def update
-    respond_to do |format|
-      if @card.update(card_params)
-        format.html { redirect_to @card, notice: "Card was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @card }
-      else
-        format.html { render :edit, status: :unprocessable_content }
-        format.json { render json: @card.errors, status: :unprocessable_content }
-      end
+def update
+  respond_to do |format|
+    if @card.update(card_params)
+      format.html { redirect_to @card.list.board, notice: "Card atualizado com sucesso.", status: :see_other }
+      format.json { render :show, status: :ok, location: @card }
+    else
+      format.html { render :edit, status: :unprocessable_content }
+      format.json { render json: @card.errors, status: :unprocessable_content }
     end
   end
+end
 
   # DELETE /cards/1 or /cards/1.json
   def destroy

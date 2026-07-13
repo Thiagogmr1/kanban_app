@@ -36,17 +36,17 @@ def create
 end
 
   # PATCH/PUT /lists/1 or /lists/1.json
-  def update
-    respond_to do |format|
-      if @list.update(list_params)
-        format.html { redirect_to @list, notice: "List was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @list }
-      else
-        format.html { render :edit, status: :unprocessable_content }
-        format.json { render json: @list.errors, status: :unprocessable_content }
-      end
+def update
+  respond_to do |format|
+    if @list.update(list_params)
+      format.html { redirect_to @list.board, notice: "Lista atualizada com sucesso.", status: :see_other }
+      format.json { render :show, status: :ok, location: @list }
+    else
+      format.html { render :edit, status: :unprocessable_content }
+      format.json { render json: @list.errors, status: :unprocessable_content }
     end
   end
+end
 
 # DELETE /lists/1 or /lists/1.json
 def destroy
