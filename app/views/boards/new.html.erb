@@ -1,11 +1,11 @@
-<% content_for :title, "New board" %>
+<% content_for :title, "Novo quadro" %>
 
-<h1>New board</h1>
+<div class="form-page">
+  <div class="form-card">
+    <h1 class="form-title">Criar novo quadro</h1>
 
-<%= render "form", board: @board %>
+    <%= render "form", board: @board %>
 
-<br>
-
-<div>
-  <%= link_to "Back to boards", boards_path %>
+    <%= link_to "← Voltar para os quadros", boards_path, class: "form-back-link" %>
+  </div>
 </div>

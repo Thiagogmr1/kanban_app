@@ -1,4 +1,5 @@
 import { Application } from "@hotwired/stimulus"
+import "autosave_inline_edit"
 
 const application = Application.start()
 

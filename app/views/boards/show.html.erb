@@ -1,24 +1,42 @@
-<h1><%= @board.name %></h1>
+<header class="page-header">
+  <h1 class="board-title"><%= @board.name %></h1>
+  <%= link_to "← Quadros", boards_path, class: "back-link" %>
+</header>
 
-<h2>Lists</h2>
+<div class="board-container">
+  <% @board.lists.each do |list| %>
+    <section class="list-column">
+<div class="list-header">
+  <%= form_with(model: [@board, list], method: :patch, class: "edit-list-form") do |form| %>
+    <%= form.text_field :name, value: list.name, class: "list-title-input" %>
+  <% end %>
+  <%= button_to "×", [@board, list], method: :delete,
+        class: "delete-list-btn",
+        form: { data: { turbo_confirm: "Tem certeza que deseja excluir a lista \"#{list.name}\" e todos os seus cards?" } } %>
+</div>
 
-<% @board.lists.each do |list| %>
-  <h3><%= list.name %></h3>
+      <div class="card-list"
+          data-controller="sortable"
+          data-sortable-board-id-value="<%= @board.id %>"
+          data-sortable-list-id-value="<%= list.id %>">
+        <% if list.cards.any? %>
+          <%= render partial: "cards/card", collection: list.cards, as: :card %>
+        <% else %>
+          <p class="empty-list">Nenhum card ainda</p>
+        <% end %>
+      </div>
 
-  <% list.cards.each do |card| %>
-    <p>- <%= card.title %></p>
+      <%= form_with(model: [@board, list, Card.new], class: "new-card-form") do |form| %>
+        <%= form.text_field :title, placeholder: "Título do card", class: "new-card-input" %>
+        <%= form.submit "Adicionar", class: "new-card-submit" %>
+      <% end %>
+    </section>
   <% end %>
 
-  <h4>New Card</h4>
-
-  <%= form_with(model: [@board, list, Card.new]) do |form| %>
-    <div>
-      <%= form.text_field :title, placeholder: "Card title" %>
-    </div>
-
-    <div>
-      <%= form.submit "Add Card" %>
-    </div>
-  <% end %>
-
-<% end %>
+  <section class="list-column new-list-column">
+    <%= form_with(model: [@board, List.new], class: "new-list-form") do |form| %>
+      <%= form.text_field :name, placeholder: "Nome da lista", class: "new-list-input" %>
+      <%= form.submit "Adicionar lista", class: "new-list-submit" %>
+    <% end %>
+  </section>
+</div>
