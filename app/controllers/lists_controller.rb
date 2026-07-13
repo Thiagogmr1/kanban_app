@@ -35,7 +35,7 @@ def create
   end
 end
 
-  # PATCH/PUT /lists/1 or /lists/1.json
+# PATCH/PUT /lists/1 or /lists/1.json
 def update
   respond_to do |format|
     if @list.update(list_params)

@@ -37,7 +37,7 @@ class CardsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /cards/1 or /cards/1.json
+# PATCH/PUT /cards/1 or /cards/1.json
 def update
   respond_to do |format|
     if @card.update(card_params)
